@@ -12,7 +12,7 @@ public class StartApplication {
 
     @GetMapping("/")
     public String index(final Model model) {
-        model.addAttribute("title", "Howdy Folks..Welcome to Devops Coaching by Coach AK!");
+        model.addAttribute("title", "Howdy..Welcome to this demo app!");
         model.addAttribute("msg", "Hello All..We are deploying using Helm...into EKS cluster!!!!");
         return "index";
     }

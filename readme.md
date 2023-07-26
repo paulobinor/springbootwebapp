@@ -1,30 +1,27 @@
-## What is it?
-This source code is an Spring Boot web application).
- 
-Tested with
-* Docker 19.03
-* Ubuntu 19
-* Java 8 or Java 11
-* Spring Boot 2.2.4.RELEASE
-* Maven
+## Description
+This source code is a Spring Boot web application. A terraform file provisions the following:
+1. EC2 instance
+2. EKS CLuster
+3. ECR Repository
 
-For explanation, please visit this article - [Docker and Spring Boot](https://mkyong.com/docker/docker-spring-boot-examples/)
+##Tools Installed 
+2. Jenkins
+3. Install AWS CLI on Jenkins instance
+4. Helm Jenkins instance for deploying to EKS cluster
+5. Kubectl on Jenkins instance
+6. eksctl on Jenkins instance
 
-## How to run this?
-```bash
-$ git clone https://github.com/mkyong/docker-java
-$ cd docker-spring-boot
-$ mvn clean package
-$ java -jar target/spring-boot-web.jar
+## The Pipeline
+After EC2 provisioning and Jenkins is installed, obtain the initial administrator password from the console screen and use to configure Jenkins instance. 
 
-  access http://localhost:8080
+Jenkins pipeline will:
 
-//dockerize
+- Automate maven build(jar) using Jenkins
+- Automate Docker image creation
+- Automate Docker image upload into Elastic container registry(ECR)
+- Automate Springboot docker container deployments into Elastic Kubernetes Cluster using Helm charts
 
-// create a docker image
-$ sudo docker build -t spring-boot:1.0 .
-// run it
-$ sudo docker run -d -p 8080:8080 -t spring-boot:1.0
+You can find the Jenkins pipeline file "Jenkinsfile" in the root folder. Copy the contents of the file to your Pipeline and replace variables where applicable
 
-  access http://localhost:8080
-```
+Install Docker in Jenkins and Jenkins have proper permission to perform Docker builds
+Make sure to Install Docker, Docker pipeline 
